@@ -20,7 +20,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: loadgenerator
-        image: gcr.io/bank-of-anthos/loadgenerator:v0.4.3
+        image: ghcr.io/nginxinc/bos-loadgenerator:v1.0.0
         env:
         - name: FRONTEND_ADDR
           value: "frontend:80"
