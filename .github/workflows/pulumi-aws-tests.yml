@@ -14,9 +14,12 @@ jobs:
       id: pulumi-aws-tests-cache-virtualenv
       with:
         requirement_files: pulumi/aws/requirements.txt
+        custom_virtualenv_dir: pulumi/aws/venv
 
     - uses: syphar/restore-pip-download-cache@v1
       if: steps.pulumi-aws-tests-cache-virtualenv.outputs.cache-hit != 'true'
+      with:
+        custom_virtualenv_dir: pulumi/aws/venv
 
     - run: ./setup_venv.sh
       working-directory: pulumi/aws
