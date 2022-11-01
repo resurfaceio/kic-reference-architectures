@@ -91,6 +91,30 @@ cluster_args = eks.ClusterArgs(
 cluster = eks.Cluster(resource_name=f"{project_name}-{stack_name}",
                       args=cluster_args)
 
+# Add extra node for Resurface
+resurface_nodegroup_args = eks.NodeGroupArgs(
+    cluster=cluster.core,
+    instance_type="c6i.2xlarge",
+    min_size=1,
+    max_size=2,
+    desired_capacity=1,
+#    extra_node_security_groups=[
+#        cluster.core.node_group_options.node_security_group
+#    ],
+    taints={
+        "resurface": aws.eks.NodeGroupTaintArgs(
+            effect="NoSchedule",
+            key="resurface",
+            value="true"
+        )
+    }
+)
+
+resurface_nodegroup = eks.NodeGroup(
+    resource_name=f"{project_name}-{stack_name}-resurface",
+    args=resurface_nodegroup_args
+)
+
 # Export the clusters' kubeconfig
 pulumi.export("cluster_name", cluster.eks_cluster.name)
 pulumi.export("kubeconfig", cluster.kubeconfig)

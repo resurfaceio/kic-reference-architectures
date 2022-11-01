@@ -1,0 +1,23 @@
+provider: aws
+
+ingress:
+  enabled: false
+
+custom:
+  service:
+    apiexplorer:
+      type: ClusterIP
+
+sniffer:
+  enabled: true
+  discovery:
+    enabled: true
+    skip:
+      ns: [ "kube-system" ]
+      svc: [ "kubernetes" ]
+  services:
+  - namespace: bos
+  logger:
+    enabled: true
+    rules: |
+      include debug

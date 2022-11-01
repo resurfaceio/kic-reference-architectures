@@ -86,6 +86,7 @@ class Provider:
             PulumiProject(path='kubernetes/nginx/ingress-controller-namespace',
                           description='K8S Ingress NS'),
             PulumiProject(path='kubernetes/nginx/ingress-controller', description='Ingress Controller'),
+            PulumiProject(path='kubernetes/resurface', description='Resurface'),
             PulumiProject(path='kubernetes/logstore', description='Logstore'),
             PulumiProject(path='kubernetes/logagent', description='Log Agent'),
             PulumiProject(path='kubernetes/certmgr', description='Cert Manager'),
